@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block body %}
+<body class="sign">
+  <nav class="navigation">
+    <ul>
+      <li><a href="{{ url_for('index') }}"> Home </a></li>
+      <li><a href="{{ url_for('about') }}">about us</a></li>
+      <li><a href="{{ url_for('add_recipes') }} " class="home">add a recipe</a></li>
+      <li><a href="{{ url_for('sign_in') }}">login</a></li>
+    </ul>
+  </nav>  
+  <div id="form-box3">
+    <h1>Do you have recipe ?</h1>
+    <form class="sign-form" action="{{url_for('add_recipe')}}" method="post" enctype="multipart/form-data">
+      <label for="recipe-name"> recipe name: </label>
+      <input
+        type="text"
+        id="recipe-name"
+        name="recipe-name"
+        placeholder="recipe name"
+        required
+      />
+      <label for="ingrediants">choose ingrediants :</label>
+      <div style="width: 320px; height: 150px; overflow-y:auto" id="scroll-div">
+        <ul>
+          <li>
+            <label>
+              <input type="checkbox" name="ingrediants" id="ingrediants" value="onion">
+              <p>onion</p>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="ingrediants" id="ingrediants" value="tomato">
+              <p>tomato</p>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="ingrediants" id="ingrediants" value="potato">
+              <p>potato</p>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="ingrediants" id="ingrediants" value="egg">
+              <p>egg</p>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="ingrediants" id="ingrediants" value="oil">
+              <p>oil</p>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="ingrediants" id="ingrediants" value="flour">
+              <p>flour</p>
+            </label>
+          </li>
+        </ul>
+      </div>
+      <label for="recipe-description"> recipe description :</label>
+      <textarea
+        name="recipe-description"
+        id="recipe-description"
+        cols="40"
+        rows="10"
+        placeholder="description..."
+        required
+      ></textarea>
+      <label for="recipe-img"> upload an Image of the recipe :</label>
+      <input
+        type="file"
+        name="recipe-img"
+        id="recipe-img"
+        accept="Image/*"
+        required
+      />
+      <input type="submit" name="button" id="button" value="submit" />
+    </form>
+  </div>
+  <script tabindex="text/javascript">
+    var myDiv = document.getElementById('scroll-div');
+
+    myDiv.addEventListener("scroll" , myPageScroll);
+    function myPageScroll(){
+      var myScrollTop = myDiv.scrollTop;
+      var myScrollHeight = myDiv.scrollHeight;
+      var diff = myScrollHeight - myScrollTop;
+      var height = myDiv.clientHeight;
+      var offPageHeight = 5;
+
+      if(diff < (height + offPageHeight)){
+        console.log("Call Ajax to Refresh");
+      }
+    }
+  </script>
+</body>
+{% endblock %}

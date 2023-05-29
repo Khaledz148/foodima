@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block body %}
+  <body class="sign">
+    <nav class="navigation">
+      <ul>
+        <li><a href="{{ url_for('index') }}"> Home </a></li>
+        <li><a href="{{ url_for('about') }}" >about us</a></li>
+        <li><a href="{{ url_for('add_recipes') }}">add a recipe</a></li>
+        <li><a href="{{ url_for('sign_in') }}" class="home">login</a></li>
+      </ul>
+    </nav>
+    <div id="form-box">
+        <h1>login</h1>
+      <form class="sign-form">
+        <label for="email">Enter your email :</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="your email"
+          required
+        />
+        <label for="password">Enter your password :</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="your password"
+          required
+        />
+        <input type="submit" name="button" id="button" value="login" />
+      </form>
+      <p id="p-sign"> don't have an account ? <a href="{{ url_for('sign_up') }}">sign up</a></p>
+    </div>
+  </body>
+
+  {% endblock body %}

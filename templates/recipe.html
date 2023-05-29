@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block body %}
+<body>
+  <nav class="navigation">
+    <ul>
+      <li><a href="{{ url_for('index') }}"> Home </a></li>
+      <li><a href="{{ url_for('about') }}">about us</a></li>
+      <li><a href="{{ url_for('add_recipes') }}">add a recipe</a></li>
+      <li><a href="{{ url_for('sign_in') }}">login</a></li>
+    </ul>
+  </nav>
+  <div class="recipe-format">
+    <div class="img">
+    <img src="{{ url_for('static', filename='uploads/')}}/{{recipe[3]}}" alt="img1" id="img">
+    </div>
+    <div class="content-format">
+      <h1 class="recipe">recipe name: {{ recipe[1] }} </h1>
+      <p class="recipe">recipe description: {{ recipe[2] }}</p>
+      <div class="recipe">
+        <p>ingrediants: </p>
+        <ul>
+          {% for i in ingrediants:%}
+          <li>{{ i }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+{% endblock %}

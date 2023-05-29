@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block body %}
+<script
+  src="https://code.jquery.com/jquery-3.6.1.slim.min.js"
+  integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA="
+  crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function(){
+        var $search = $("#search").on('input',function(){
+            var matcher = new RegExp($(this).val(), 'gi');
+            $('.card').show().not(function(){
+                return matcher.test($(this).find('.card-title, .card-description, .ing').text())
+            }).hide();
+        });
+    });
+  </script>
+<body class="home">
+  <nav class="navigation">
+    <ul>
+      <li><a href="{{ url_for('index') }}" class="home"> Home </a></li>
+      <li><a href="{{ url_for('about') }}">about us</a></li>
+      <li><a href="{{ url_for('add_recipes') }} " >add a recipe</a></li>
+      <li><a href="{{ url_for('sign_in') }}">login</a></li>
+    </ul>
+  </nav> 
+  <input id="search" type="text" placeholder="search...">
+{% if recipes: %}
+  {% for recipe in recipes: %}
+    <div class="card" id="myList">
+      <div class="card-body">
+        <img src="{{ url_for('static', filename='uploads/')}}/{{recipe[3]}}" alt="img1" class="card-img">
+        <h2 class="card-title">{{recipe[1]}}</h2>
+        <p class="card-description">{{recipe[2]}}</p>
+        <p class="ing" style="display: none;">{% for i in recipes_ing.get(recipe[0]) %} {{ i }}{% endfor %}</p>
+      </div>
+      <a href="{{ url_for('show_recipe', recipe_id = recipe[0])}}" class="card-a"><button class="card-btn">view recipe</button></a> 
+    </div>
+  {% endfor %}
+{% else %}
+<h1>No recipes found</h1>
+{% endif %}
+</body>
+{% endblock body %}
